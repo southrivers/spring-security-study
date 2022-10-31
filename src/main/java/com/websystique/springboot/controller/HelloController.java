@@ -8,9 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HelloController {
 
 	@RequestMapping("/")
-	String home(ModelMap modal) {
-		modal.addAttribute("title", "Dear Learner");
-		modal.addAttribute("message", "Welcome to SpringBoot");
-		return "hello";
+	String login() {
+		return "login";
+	}
+
+	/**
+	 * 按理说这里没有登录的时候应该会被拦截
+	 * @return
+	 */
+	@RequestMapping("/home")
+	String home() {
+		return "home";
 	}
 }

@@ -7,8 +7,9 @@
 <body>
 	<div class="container">
 	    <div class="jumbotron">
-	        <h2>${title}</h2>
-	        <p>${message}</p>
+	        <h1>
+				this is login page !
+			</h1>
 	    </div>
 	</div>
 </body>
