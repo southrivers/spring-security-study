@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,15 +22,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
-    @Autowired
-    UserDetailsService userDetailsService;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
+//    使用了自定义的provider之后，我们就不需要再使用这里的逻辑进行校验了
+//    @Autowired
+//    UserDetailsService userDetailsService;
+//
+//    @Autowired
+//    PasswordEncoder passwordEncoder;
 
     @Autowired
     CustomAuthenticationFilter customAuthenticationFilter;
+
+    @Autowired
+    AuthenticationProvider authenticationProvider;
 
     /**
      * 由于我们需要主动调用** 用户自定义的 **认证的逻辑，因此这里需要再springsecurity给我们提供的配置类中完成manager的装配
@@ -51,7 +55,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // 当我们请求认证用户名密码的时候，authenticationManager会接收密码并通过我们提供的加密的方式对其进行加密
         // 该过程是不被外部知晓的
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+        // FIXME 这里当我们使用了自定义的provider来验证用户的合法性之后，我们就不需要再通过userDetailservice来进行校验了，因此移除此处代码
+//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+        auth.authenticationProvider(authenticationProvider);
     }
 
     //3、 除了上述验证的过程之外，接下来需要做的是配置请求是否拦截等信息，这样说的话login应该是不会被拦截的(已确认确实不会被拦截)
