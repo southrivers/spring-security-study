@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.ComponentScan;
 
 
-//@EnableAutoConfiguration
-//@ComponentScan("com.websystique.springboot")
-@SpringBootApplication(scanBasePackages={"com.websystique.springboot"}, exclude = { SecurityAutoConfiguration.class })// same as @Configuration @EnableAutoConfiguration @ComponentScan
+@EnableAutoConfiguration
+@ComponentScan("com.websystique.springboot")
+//@SpringBootApplication(scanBasePackages={"com.websystique.springboot"}, exclude = { SecurityAutoConfiguration.class })// same as @Configuration @EnableAutoConfiguration @ComponentScan
 public class SpringBootStandAloneApp {
 
 	public static void main(String[] args) {

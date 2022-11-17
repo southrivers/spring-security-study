@@ -5,3 +5,5 @@ create table user(id varchar(80), name varchar(50), passwd varchar(50), create_d
 insert into user values
 ('1111', 'wangershuai', 'wes123', now(), now()),
 ('2222', 'leini', 'lei123', now(), now());
+
+
