@@ -58,6 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // FIXME 这里当我们使用了自定义的provider来验证用户的合法性之后，我们就不需要再通过userDetailservice来进行校验了，因此移除此处代码
 //        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
         auth.authenticationProvider(authenticationProvider);
+        // 值得注意的是这里可以配置多个provider，这一步看似没必要，实际上是由于我们在controller里面调用了manager的auth方法，
+        // 也就是说manager更多的像是一个门面类
     }
 
     //3、 除了上述验证的过程之外，接下来需要做的是配置请求是否拦截等信息，这样说的话login应该是不会被拦截的(已确认确实不会被拦截)
